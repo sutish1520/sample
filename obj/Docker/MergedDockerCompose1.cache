@@ -1,0 +1,134 @@
+networks:
+  backend: {}
+services:
+  authenticationdb:
+    container_name: authentication-db
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: S3cur3P@ssW0rd!
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    networks:
+      backend: {}
+    ports:
+    - published: 8003
+      target: 1433
+  authenticationservice:
+    build:
+      context: C:\Users\VMAdmin\Desktop\Keep5
+      dockerfile: authenticationservice/Dockerfile
+    container_name: authentication-service
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      DB_HOST: authenticationdb
+      DB_MSSQL_SA_PASSWORD: S3cur3P@ssW0rd!
+      DB_NAME: authenticationdb
+    image: authenticationservice
+    networks:
+      backend: {}
+    ports:
+    - published: 8004
+      target: 80
+    - target: 80
+    volumes:
+    - C:\Users\VMAdmin\Desktop\Keep5\data:/var/opt/mssql:rw
+  categorydb:
+    container_name: category-db
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: Password@123456
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    networks:
+      backend: {}
+    ports:
+    - published: 8007
+      target: 1433
+  categoryservice:
+    build:
+      context: C:\Users\VMAdmin\Desktop\Keep5
+      dockerfile: Categoryservice/Dockerfile
+    container_name: category-service
+    environment:
+      DB_HOST: categorydb
+      DB_MSSQL_SA_PASSWORD: Password@123456
+      DB_NAME: category_db
+    image: categoryservice
+    networks:
+      backend: {}
+    ports:
+    - published: 8008
+      target: 80
+    volumes:
+    - C:\Users\VMAdmin\Desktop\Keep5\data:/var/opt/mssql:rw
+  notedb:
+    container_name: note-db
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: S3cur3P@ssW0rd!
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    networks:
+      backend: {}
+    ports:
+    - published: 8001
+      target: 1433
+  noteservice:
+    build:
+      context: C:\Users\VMAdmin\Desktop\Keep5
+      dockerfile: noteservice/Dockerfile
+    container_name: note-service
+    environment:
+      DB_HOST: notedb
+      DB_MSSQL_SA_PASSWORD: S3cur3P@ssW0rd!
+      DB_NAME: notedb
+    image: noteservice
+    networks:
+      backend: {}
+    ports:
+    - published: 8002
+      target: 80
+    volumes:
+    - C:\Users\VMAdmin\Desktop\Keep5\data:/var/opt/mssql:rw
+  reminderdb:
+    container_name: reminder_db
+    image: mongo
+    networks:
+      backend: {}
+    ports:
+    - published: 18005
+      target: 27017
+  reminderservice:
+    build:
+      context: C:\Users\VMAdmin\Desktop\Keep5
+      dockerfile: ReminderService/Dockerfile
+    container_name: reminderservice
+    environment:
+      DB_HOST: reminderdb
+      DB_NAME: reminderDb
+    image: reminderservice
+    networks:
+      backend: {}
+    ports:
+    - published: 18008
+      target: 80
+  userdb:
+    container_name: user_db
+    image: mongo
+    networks:
+      backend: {}
+    ports:
+    - published: 18006
+      target: 27017
+  userservice:
+    build:
+      context: C:\Users\VMAdmin\Desktop\Keep5
+      dockerfile: UserService/Dockerfile
+    container_name: userservice
+    environment:
+      DB_HOST: userdb
+      DB_NAME: userDb
+    image: reminderservice
+    networks:
+      backend: {}
+    ports:
+    - published: 18009
+      target: 80
+version: '3.9'

@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoteService", "NoteService\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthenticationService", "AuthenticationService\AuthenticationService.csproj", "{8A6818D2-313A-492D-AD5B-13FC2F12DD5C}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{EE0CA74F-F61F-4983-8509-635E43B54B01}"
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{0D35C610-19F9-4DB4-B96E-5A325AE5D620}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +41,10 @@ Global
 		{8A6818D2-313A-492D-AD5B-13FC2F12DD5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A6818D2-313A-492D-AD5B-13FC2F12DD5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A6818D2-313A-492D-AD5B-13FC2F12DD5C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EE0CA74F-F61F-4983-8509-635E43B54B01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EE0CA74F-F61F-4983-8509-635E43B54B01}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EE0CA74F-F61F-4983-8509-635E43B54B01}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EE0CA74F-F61F-4983-8509-635E43B54B01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D35C610-19F9-4DB4-B96E-5A325AE5D620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D35C610-19F9-4DB4-B96E-5A325AE5D620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D35C610-19F9-4DB4-B96E-5A325AE5D620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D35C610-19F9-4DB4-B96E-5A325AE5D620}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

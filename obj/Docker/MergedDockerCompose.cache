@@ -1,0 +1,11 @@
+services:
+  authenticationservice:
+    build:
+      context: C:\Users\VMAdmin\Desktop\Keep5
+      dockerfile: AuthenticationService/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    image: authenticationservice
+    ports:
+    - target: 80
+version: '3.4'

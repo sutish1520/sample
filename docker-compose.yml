@@ -1,0 +1,146 @@
+networks:
+  backend: 
+
+services:
+  authenticationdb:
+    container_name: authentication-db
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=S3cur3P@ssW0rd! 
+    networks:
+      - backend
+    ports:
+      - 8003:1433
+
+ 
+
+  authenticationservice:
+
+    container_name: authentication-service 
+    image: ${DOCKER_REGISTRY-}authenticationservice
+    build:
+      context: .
+      dockerfile: authenticationservice/Dockerfile
+    networks:
+      - backend
+    ports:
+      - 8004:80
+    volumes:
+      - "./data:/var/opt/mssql"
+    environment:
+      - DB_HOST=authenticationdb
+      - DB_NAME=authenticationdb
+      - DB_MSSQL_SA_PASSWORD=S3cur3P@ssW0rd!
+
+ 
+
+  categorydb:
+    container_name: category-db
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Password@123456 
+    networks:
+      - backend
+    ports:
+      - 8007:1433
+
+ 
+
+  categoryservice:
+
+    container_name: category-service
+    image: ${DOCKER_REGISTRY-}categoryservice
+    build:
+      context: .
+      dockerfile: Categoryservice/Dockerfile
+    networks:
+      - backend
+    ports:
+      - 8008:80
+    volumes:
+      - "./data:/var/opt/mssql"
+    environment:
+      - DB_HOST=categorydb
+      - DB_NAME=category_db
+      - DB_MSSQL_SA_PASSWORD=Password@123456
+
+ 
+
+  notedb:
+    container_name: note-db
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=S3cur3P@ssW0rd! 
+    networks:
+      - backend
+    ports:
+      - 8001:1433
+
+ 
+
+  noteservice:
+
+    container_name: note-service 
+    image: ${DOCKER_REGISTRY-}noteservice
+    build:
+      context: .
+      dockerfile: noteservice/Dockerfile
+    networks:
+      - backend
+    ports:
+      - 8002:80
+    volumes:
+      - "./data:/var/opt/mssql"
+    environment:
+      - DB_HOST=notedb
+      - DB_NAME=notedb
+      - DB_MSSQL_SA_PASSWORD=S3cur3P@ssW0rd!   
+
+  reminderdb:
+    container_name: reminder_db
+    image: mongo
+    ports:
+      - 18005:27017
+    networks:
+      - backend
+
+  reminderservice:
+    container_name: reminderservice
+    image: ${DOCKER_REGISTRY-}reminderservice
+    build:
+      context: .
+      dockerfile: ReminderService/Dockerfile
+    networks:
+      - backend
+    ports:
+      - 18008:80
+    environment:
+      - DB_HOST=reminderdb
+      - DB_NAME=reminderDb
+
+ 
+
+  userdb:
+    container_name: user_db
+    image: mongo
+    ports:
+      - 18006:27017
+    networks:
+      - backend
+
+  userservice:
+    container_name: userservice
+    image: ${DOCKER_REGISTRY-}reminderservice
+    build:
+      context: .
+      dockerfile: UserService/Dockerfile
+    networks:
+      - backend
+    ports:
+      - 18009:80
+    environment:
+      - DB_HOST=userdb
+      - DB_NAME=userDb
